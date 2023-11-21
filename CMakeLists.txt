@@ -30,12 +30,12 @@ endif ()
 # Compiler flags for optimization
 if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2")
+    add_compile_options(/W4)  # Equivalent to -Wall in GCC/Clang
 else()
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+    add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# Common compiler flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 
 # Option for building shared/static library, default to static
 option(BUILD_TIMING_SHARED_LIBS "Build using shared libraries" ON)
