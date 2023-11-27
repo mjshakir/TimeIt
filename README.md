@@ -33,7 +33,7 @@ To integrate `TimeIt` into your `C++` project, follow these steps:
 1. Clone the `TimeIt` repository to your local machine:
 
 ```bash
-git clone https://github.com/your_username/TimeIt.git
+git clone https://github.com/mjshakir/TimeIt.git
 ```
 2. Create a build directory and navigate to it:
 ```bash
