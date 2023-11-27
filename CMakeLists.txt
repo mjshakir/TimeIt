@@ -112,6 +112,9 @@ if(TIMEIT_STANDALONE_PROJECT)
     )
 endif()
 
+# Alias for TimeIt library
+add_library(TimeIt::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
 # Set TIMEIT_LIBRARIES variable
 if(TIMEIT_STANDALONE_PROJECT)
     set(TIMEIT_LIBRARIES TimeIt::${PROJECT_NAME})
