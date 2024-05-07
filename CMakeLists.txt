@@ -26,6 +26,12 @@ if (${FORCE_COLORED_OUTPUT})
     endif ()
 endif ()
 #------------------------------------------------------------------------------------------
+# Library target
+add_library(${PROJECT_NAME} ${LIB_TYPE} 
+    src/TimeIt.cpp
+    src/TimeFunction.cpp
+    )
+#------------------------------------------------------------------------------------------
 # Compiler flags for optimization
 if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2")
@@ -55,12 +61,6 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 else()
     set(TIMING_CODE_TOP_LEVEL FALSE)
 endif()
-#------------------------------------------------------------------------------------------
-# Library target
-add_library(${PROJECT_NAME} ${LIB_TYPE} 
-    src/TimeIt.cpp
-    src/TimeFunction.cpp
-    )
 #------------------------------------------------------------------------------------------
 # Specify the output directories for standalone project
 if(TIMEIT_STANDALONE_PROJECT)
