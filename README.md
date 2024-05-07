@@ -1,12 +1,10 @@
 # TimeIt - Low Overhead Timing Library
 
-![Ubuntu X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_X86_64.yml/badge.svg)
-![Ubuntu ARM](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_arm.yml/badge.svg)
-![Ubuntu RISCV](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_riscv.yml/badge.svg)
-![macOS X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/macos_x86_64.yml/badge.svg)
-![macOS ARM](https://github.com/mjshakir/TimeIt/actions/workflows/macos_arm.yml/badge.svg)
-![Windows X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/windows_x86_64.yml/badge.svg)
-![Windows ARM](https://github.com/mjshakir/TimeIt/actions/workflows/windows_arm.yml/badge.svg)
+| Architecture | Ubuntu | macOS | Windows |
+|--------------|--------|-------|---------|
+| **x86_64**   | ![Ubuntu X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_X86_64.yml/badge.svg) | ![macOS X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/macos_x86_64.yml/badge.svg) | ![Windows X86_64](https://github.com/mjshakir/TimeIt/actions/workflows/windows_x86_64.yml/badge.svg) |
+| **ARM**      | ![Ubuntu ARM](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_arm.yml/badge.svg) | ![macOS ARM](https://github.com/mjshakir/TimeIt/actions/workflows/macos_arm.yml/badge.svg) | ![Windows ARM](https://github.com/mjshakir/TimeIt/actions/workflows/windows_arm.yml/badge.svg) |
+| **RISCV**    | ![Ubuntu RISCV](https://github.com/mjshakir/TimeIt/actions/workflows/ubuntu_riscv.yml/badge.svg) |        |         |
 
 TimeIt is a lightweight `C++` library designed to provide low-overhead timing functionality for your projects. Whether you need to measure the execution time of a specific function or profile an entire project, TimeIt makes it easy and efficient. This README provides an overview of TimeIt, its features, and instructions for integrating it into your C++ projects.
 
