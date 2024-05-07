@@ -34,14 +34,46 @@ add_library(${PROJECT_NAME} ${LIB_TYPE}
 #------------------------------------------------------------------------------------------
 # Compiler flags for optimization
 if(MSVC)
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2")
-    add_compile_options(/W4)  # Equivalent to -Wall in GCC/Clang
+    # MSVC specific warning flags
+    add_library(common_options INTERFACE)
+    target_compile_options(common_options INTERFACE /W4)  # Equivalent to -Wall in GCC/Clang
+else()
+    # GCC/Clang specific warning flags
+    add_library(common_options INTERFACE)
+    target_compile_options(common_options INTERFACE -Wall -Wextra -Wpedantic -pedantic-errors -Werror=format-security -fasynchronous-unwind-tables)
+endif()
+#------------------------------------------------------------------------------------------
+# Compiler-specific flags
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_RELEASE "/O2 /MD")
+    set(CMAKE_CXX_FLAGS_DEBUG "/Od /MDd")
+    target_compile_options(${PROJECT_NAME} PRIVATE 
+        "$<$<CONFIG:Release>:/O2>" 
+        "$<$<CONFIG:Debug>:/Od>" 
+        "$<$<CONFIG:Debug>:/Zi>"
+    )
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_link_options(${PROJECT_NAME} PRIVATE /DEBUG)
+    endif()
+
     set_target_properties(${PROJECT_NAME} PROPERTIES
         WINDOWS_EXPORT_ALL_SYMBOLS TRUE
     )
 else()
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-    add_compile_options(-Wall -Wextra -Wpedantic -pedantic-errors -Werror=format-security -fasynchronous-unwind-tables)
+    # For non-MSVC compilers
+    target_compile_options(${PROJECT_NAME} PRIVATE 
+        "$<$<CONFIG:Release>:-O3>"
+    )
+    # Conditionally include AddressSanitizer flags only if standalone and in Debug mode
+    if(THREADPOOL_STANDALONE_PROJECT AND "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang|GNU")
+        set(SANITIZE_FLAGS "$<$<CONFIG:Debug>:-fsanitize=address>")
+        target_compile_options(${PROJECT_NAME} PRIVATE 
+            "$<$<CONFIG:Debug>:-g>"
+            "$<$<CONFIG:Debug>:-O0>"
+            ${SANITIZE_FLAGS}
+        )
+        target_link_options(${PROJECT_NAME} PRIVATE ${SANITIZE_FLAGS})
+    endif()
 endif()
 #------------------------------------------------------------------------------------------
 # Option for building shared/static library, default to static
