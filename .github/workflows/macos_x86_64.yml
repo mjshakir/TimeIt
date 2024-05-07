@@ -15,6 +15,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    
+    - name: Setup Homebrew
+      run: |
+        which brew
+        if [ $? -ne 0 ]; then
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+
+    - name: Install Google Test
+      run: brew install googletest
 
     - name: Setup CMake and Ninja
       uses: lukka/get-cmake@v3.21.1
@@ -33,4 +43,4 @@ jobs:
 
     - name: Test
       working-directory: build
-      run: ctest
+      run: ctest --output-on-failure
